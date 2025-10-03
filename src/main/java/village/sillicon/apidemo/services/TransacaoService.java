@@ -88,9 +88,10 @@ public class TransacaoService {
                 if (valor.compareTo(conta.getSaldo()) > 0) {
                     throw new RuntimeException("Valor maior que saldo");
                 }
-                // implementar checar outros saques do dia
-                if (valor.compareTo(conta.getLimiteSaqueDiario()) > 0) {
-                    throw new RuntimeException("Valor maior que limite de saque");
+
+                BigDecimal totalSaquesHoje = transacaoRepository.totalSaquesDoDia(conta.getIdConta());
+                if (totalSaquesHoje.add(valor).compareTo(conta.getLimiteSaqueDiario()) > 0) {
+                    throw new RuntimeException("Limite de saque diário excedido");
                 }
                 break;
 

@@ -32,7 +32,7 @@ public class ContaController {
     }
 
     @GetMapping("buscarPorId/{id}")
-    public Conta buscarPorId(@RequestParam int id) {
+    public Conta buscarPorId(@PathVariable int id) {
         return contaService.acharPorId(id);
     }
 
